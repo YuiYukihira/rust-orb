@@ -20,5 +20,5 @@ cat << EOF >> "${BASH_ENV}"
     export RUSTC_WRAPPER="sccache"
     export CARGO_INCREMENTAL="0"
     export CARGO_PROFILE_RELEASE_LTO="thin"
-    export RUSTFLAGS="${rustflags[*]}}"
+    export RUSTFLAGS="${rustflags[*]}"
 EOF
