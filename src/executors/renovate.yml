@@ -1,4 +1,4 @@
 description: |
   Default Renovate Executor
 docker:
-  - image: "545642868320.dkr.ecr.eu-west-2.amazonaws.com/makepress-renovate:latest"
+  - image: "renovate/renovate:28.10.3-slim"
