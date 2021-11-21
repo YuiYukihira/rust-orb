@@ -1,0 +1,25 @@
+description: >
+  Sets up caching, cargo authentication etc.
+parameters:
+  steps:
+    type: steps
+    description: Rust compilation steps to run
+  sccache-bucket:
+    type: string
+    description: Name of S3 bucket to use for sccache
+    default: makepress-sccache
+  sccache-region:
+    type: string
+    description: S3 region the bucket is in
+    default: eu-west-1
+steps:
+  - run:
+      name: Start sccache and configure rust
+      environment:
+        SCCACHE_BUCKET: << parameters.sccache-bucket >>
+        SCCACHE_REGION: << parameters.sccache-region >>
+      command: <<include(scripts/with-rust-pre.sh)>>
+  - steps: << parameters.steps >>
+  - run:
+      name: Stop sccache
+      command: <<include(scripts/with-rust-post.sh)>>

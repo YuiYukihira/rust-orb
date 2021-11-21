@@ -1,0 +1,16 @@
+description: Update release PRs and create GitHub releases
+executor: renovate
+steps:
+  - checkout
+  - run:
+      command: |
+        npm install --global release-please@11.23.0
+      name: Install release-please
+  - run:
+      command: |
+        for command in manifest-pr manifest-release; do
+          release-please --debug "${command}" \
+            --token "${GITHUB_TOKEN_LULUBOT}" \
+            --repo-url "${CIRCLE_REPOSITORY_URL}"
+        done
+      name: Run release-please

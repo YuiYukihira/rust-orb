@@ -1,0 +1,14 @@
+description: Publish crates
+executor: rust
+steps:
+  - checkout
+  - with-rust:
+      steps:
+        - run:
+            command: |
+              cargo workspaces publish \
+                --from-git \
+                --skip-published \
+                --token "${KTRA_TOKEN}" \
+                --yes
+            name: Publish all crates that are not published yet
