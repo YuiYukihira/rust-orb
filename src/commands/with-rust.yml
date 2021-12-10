@@ -19,6 +19,12 @@ steps:
         SCCACHE_BUCKET: << parameters.sccache-bucket >>
         SCCACHE_REGION: << parameters.sccache-region >>
       command: <<include(scripts/with-rust-pre.sh)>>
+  - run:
+      command: |
+        git config --global credential.helper store
+        git config --global --unset-all 'url.ssh://git@github.com.insteadOf' || echo "No ssh config"
+        echo "https://token:${GITHUB_TOKEN_LULBOT}@github.com" >> ~/.git-credentials
+      name: Configure git credentials
   - steps: << parameters.steps >>
   - run:
       name: Stop sccache
