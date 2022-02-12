@@ -1,5 +1,11 @@
 description: Update release PRs and create GitHub releases
 executor: renovate
+parameters:
+  language:
+    description: "What language are we releasing for?"
+    type: enum
+    default: "rust"
+    enum: ["dart", "elixir", "go", "helm", "krm-blueprint", "node", "ocaml", "php", "python", "ruby", "rust", "simple", "terraform-module"]
 steps:
   - checkout
   - run:
@@ -11,7 +17,7 @@ steps:
         for command in release-pr github-release; do
           release-please --debug "${command}" \
             --token "${GITHUB_TOKEN_LULUBOT}" \
-            --release-type "rust" \
+            --release-type << parameters.language >> \
             --repo-url "${CIRCLE_REPOSITORY_URL}"
         done
       name: Run release-please
