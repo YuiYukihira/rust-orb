@@ -26,7 +26,7 @@ steps:
   - setup_remote_docker
   - run:
       name: Build image
-      command: docker build -t << parameters.registry >>/<< parameters.image >>:<< parameters.tag>>
+      command: docker build -t << parameters.registry >>/<< parameters.image >>:<< parameters.tag>> << parameters.dockerfile >>
   - run:
       name: Publish image
       command: |
