@@ -6,6 +6,7 @@ parameters:
     type: string
   image:
     description: Image name
+    type: string
   registry:
     description: Registry to publish to
     type: string
@@ -20,4 +21,4 @@ steps:
       name: Publish image
       command: |
         echo ${<< parameters.password >>} | docker login << parameters.registry >> -- username ${<< parameters.username >>} --password-stdin
-      docker push << parameters.registry >>/<< parameters.image >>:<< parameters.tag >>
+        docker push << parameters.registry >>/<< parameters.image >>:<< parameters.tag >>

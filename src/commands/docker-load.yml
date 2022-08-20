@@ -6,4 +6,4 @@ parameters:
     type: string
 steps:
   - run: |
-    docker load < << parameters.file >>
+      docker load < << parameters.file >>
