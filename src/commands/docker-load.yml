@@ -1,0 +1,9 @@
+description: >
+  Load a docker image from an archive
+parameters:
+  file:
+    description: The image archive
+    type: string
+steps:
+  - run: |
+    docker load < << parameters.file >>

@@ -1,0 +1,20 @@
+description: >
+  Build a docker image from a dockerfile
+parameters:
+  tag:
+    description: Image tag
+    type: string
+  image:
+    description: Image name
+    type: string
+  registry:
+    description: Registry to publish to
+    type: string
+  dockerfile:
+    description: Dockerfile location
+    type: string
+    default: Dockerfile
+steps:
+  - run:
+      name: Build image
+      command: docker build -t << parameters.registry >>/<< parameters.image >>:<< parameters.tag >> << parameters.dockerfile >>
