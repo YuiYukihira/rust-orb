@@ -1,5 +1,9 @@
 description: Update release PRs and create GitHub releases
 executor: renovate
+parameters:
+  github_token:
+    description: The GitHub token to use
+    type: env_var_name
 steps:
   - checkout
   - run:
@@ -10,7 +14,7 @@ steps:
       command: |
         for command in manifest-pr manifest-release; do
           release-please --debug "${command}" \
-            --token "${GITHUB_TOKEN_LULUBOT}" \
+            --token "${<< parameters.github_token >>}" \
             --repo-url "${CIRCLE_REPOSITORY_URL}"
         done
       name: Run release-please

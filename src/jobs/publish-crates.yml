@@ -1,5 +1,9 @@
 description: Publish crates
 executor: rust
+parameters:
+  ktra_token:
+    description: The token for ktra
+    type: env_var_name
 steps:
   - checkout
   - with-rust:
@@ -9,6 +13,6 @@ steps:
               cargo workspaces publish \
                 --from-git \
                 --skip-published \
-                --token "${KTRA_TOKEN}" \
+                --token "${<< parameters.ktra_token >>}" \
                 --yes
             name: Publish all crates that are not published yet

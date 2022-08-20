@@ -5,7 +5,25 @@ parameters:
     description: "What language are we releasing for?"
     type: enum
     default: "rust"
-    enum: ["dart", "elixir", "go", "helm", "krm-blueprint", "node", "ocaml", "php", "python", "ruby", "rust", "simple", "terraform-module"]
+    enum:
+      [
+        "dart",
+        "elixir",
+        "go",
+        "helm",
+        "krm-blueprint",
+        "node",
+        "ocaml",
+        "php",
+        "python",
+        "ruby",
+        "rust",
+        "simple",
+        "terraform-module",
+      ]
+  github_token:
+    description: The GitHub token to use
+    type: env_var_name
 steps:
   - checkout
   - run:
@@ -16,7 +34,7 @@ steps:
       command: |
         for command in release-pr github-release; do
           release-please --debug "${command}" \
-            --token "${GITHUB_TOKEN_LULUBOT}" \
+            --token "${<< parameters.github_token >>}" \
             --release-type << parameters.language >> \
             --repo-url "${CIRCLE_REPOSITORY_URL}"
         done
