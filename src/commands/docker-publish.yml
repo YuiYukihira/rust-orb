@@ -20,5 +20,5 @@ steps:
   - run:
       name: Publish image
       command: |
-        echo ${<< parameters.password >>} | docker login << parameters.registry >> -- username ${<< parameters.username >>} --password-stdin
+        echo ${<< parameters.password >>} | docker login << parameters.registry >> --username ${<< parameters.username >>} --password-stdin
         docker push << parameters.registry >>/<< parameters.image >>:<< parameters.tag >>
